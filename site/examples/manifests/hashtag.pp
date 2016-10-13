@@ -27,7 +27,7 @@ class examples::hashtag {
 
   file { '/usr/local/bin/hashtag':
     ensure => file,
-    mode   => '0755'
+    mode   => '0755',
     source => 'puppet:///modules/examples/hashtag',
   }
 
