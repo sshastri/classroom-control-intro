@@ -1,0 +1,24 @@
+#! /usr/bin/env ruby
+require 'twitter'
+
+raise "Please call with a single word hashtag and an optional count." unless [1,2].include? ARGV.size
+
+subject, count = ARGV
+subject        = (subject.start_with? '#') ? subject : "\##{subject}"
+count        ||= 3
+
+puts "Looking for the last #{count} tweets on hashtag #{subject}..."
+puts
+
+credentials = {
+  :consumer_key    => 'STurW17Tj7HuoZ7dSzS0uSoIP',
+  :consumer_secret => 'wTCOhbc2BDAWULHEILaBuXKoEMjbhTOhl0edPIxlTP6bUkie3C',
+}
+client = Twitter::REST::Client.new(credentials)
+
+client.search(subject, result_type: "recent").take(count.to_i).each do |tweet|
+  puts "#{tweet.user.name} (@#{tweet.user.screen_name}) posted at [#{tweet.created_at.strftime("%a %b %d, %I:%M %p")}]:"
+  puts tweet.text
+  puts
+end
+
