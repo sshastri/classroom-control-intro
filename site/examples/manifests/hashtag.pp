@@ -18,11 +18,15 @@ class examples::hashtag {
     ensure  => present,
     require => Yumrepo['base', 'epel'],
   }
+  
+  package { 'ruby-devel':
+    ensure => present,
+  }
 
   package { 'twitter':
     ensure   => present,
     provider => gem,
-    require  => Yumgroup['Development Tools'],
+    require  => [ Yumgroup['Development Tools'], Package['ruby-devel'] ],
   }
 
   file { '/usr/local/bin/hashtag':
