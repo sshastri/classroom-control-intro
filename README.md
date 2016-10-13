@@ -1,4 +1,4 @@
-# `classroom-control-vf`
+# `classroom-control-intro`
 
 This is the classroom control repository for the Intro to Puppet class.
 
