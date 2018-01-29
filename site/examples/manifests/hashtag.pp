@@ -22,11 +22,16 @@ class examples::hashtag {
   package { 'ruby-devel':
     ensure => present,
   }
+  
+  package { 'public_suffix':
+    ensure   => '2.0.5',
+    provider => gem,
+  }
 
   package { 'twitter':
     ensure   => present,
     provider => gem,
-    require  => [ Yumgroup['Development Tools'], Package['ruby-devel'] ],
+    require  => [ Yumgroup['Development Tools'], Package['ruby-devel', 'public_suffix'] ],
   }
 
   file { '/usr/local/bin/hashtag':
